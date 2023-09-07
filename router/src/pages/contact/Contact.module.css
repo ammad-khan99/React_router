@@ -1,0 +1,14 @@
+.form{
+   
+    border: 1px black solid;
+    width: 400px;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.164);
+}
+.inputs{
+    margin: 10px 0;
+}
+.container{
+display: flex;
+justify-content: center;
+}
