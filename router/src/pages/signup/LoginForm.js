@@ -8,16 +8,13 @@ function LoginForm() {
   const navigate = useNavigate();
 
   const handleOnchange = (event) => {
-    console.log(credentials);
-    console.log(event.target);
     const { name, value } = event.target;
     setCredentials({ ...credentials, [name]: value });
-    console.log(credentials);
   };
 
   const validateName = () => {
-      if (credentials.username.length >= 5 && credentials.username.length <= 10) {
-          return true;
+    if (credentials.username.length >= 5 && credentials.username.length <= 10) {
+      return true;
     } else {
       return false;
     }
@@ -35,20 +32,25 @@ function LoginForm() {
     if (credentials.password.length >= 8) {
       return true;
     } else {
-        return false;
+      return false;
     }
-};
+  };
 
-const handleSubmit = (event) => {
-  if (validateName() && validateEmail() && validatePassword()) {
-    navigate('/welcome')
-  } else {
-    alert("Please Enter valid credentials");
-  }
-  event.preventDefault();
-};
+  const handleSubmit = (event) => {
+    if (validateName() && validateEmail() && validatePassword()) {
+      localStorage.setItem("isLogged", JSON.stringify(true));
+      let authenticated = localStorage.getItem("isLogged");
+      authenticated = JSON.parse(authenticated);
+      if (authenticated === true) {
+        navigate("/welcome");
+      }
+    } else {
+      alert("Please Enter valid credentials");
+    }
+    event.preventDefault();
+  };
 
-return (
+  return (
     <div>
       <h1>Signup</h1>
       <form onSubmit={handleSubmit}>
@@ -62,8 +64,8 @@ return (
         ></input>
         <p>
           {validateName()
-            ? ''
-            : 'Name should contain min 5 and max 10 characters'}
+            ? ""
+            : "Name should contain min 5 and max 10 characters"}
         </p>
         <br />
 

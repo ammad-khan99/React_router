@@ -1,30 +1,30 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import style from "./Navbar.module.css";
 
 function Navbar() {
-  const navStyle = ({ isActive }) => {
-    return {
-      color: isActive ? "blueviolet" : "rgb(13, 131, 209)",
-      "text-decoration": isActive ? "underline" : "none",
-    };
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("isLogged");
+    navigate("/");
   };
 
   return (
     <div className={style.nav}>
       <div>
-        <NavLink style={navStyle} className={style.links} to="/welcome">
+        <NavLink className={style.links} to="/welcome">
           Home
         </NavLink>
-        <NavLink style={navStyle} className={style.links} to="/contact">
+        <NavLink className={style.links} to="/contact">
           Contact Us
         </NavLink>
-        <NavLink style={navStyle} className={style.links} to="/todo">
+        <NavLink className={style.links} to="/todo">
           Todo
         </NavLink>
       </div>
       <div className={style.logout_div}>
-        <NavLink className={style.logout} to="/">
+        <NavLink onClick={handleLogout} className={style.logout} to="/">
           Logout
         </NavLink>
       </div>
